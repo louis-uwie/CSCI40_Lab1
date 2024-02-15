@@ -8,3 +8,7 @@ def recipe_list(request):
 def recipe_1(request):
 
     return HttpResponse("this is just a test for recipe1")
+
+def recipe_2(requst):
+
+    return HttpResponse("Last recipe.")
