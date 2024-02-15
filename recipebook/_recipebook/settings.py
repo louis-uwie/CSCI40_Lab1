@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'taskapp.urls'
+ROOT_URLCONF = '_recipebook.urls'
 
 TEMPLATES = [
     {
@@ -71,7 +71,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'taskapp.wsgi.application'
+WSGI_APPLICATION = 'recipebook.wsgi.application'
 
 
 # Database
