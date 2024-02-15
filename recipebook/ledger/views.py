@@ -95,7 +95,7 @@ def recipe_1(request):
                     "quantity": "1 packet"
                 }
             ],
-            "link": "/recipe/list"
+            "link": "/recipes/list"
         }
 
     return render(request, "recipe_1.html", ctx)
@@ -134,7 +134,7 @@ def recipe_2(request):
                     "quantity": "1 kilo"
                 }
             ],
-            "link": "/recipe/list"
+            "link": "/recipes/list"
         }
 
     return render(request, "recipe_2.html", ctx)
