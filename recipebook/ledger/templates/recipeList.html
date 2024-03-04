@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Book | List</title>
     <style>
         body {
@@ -11,8 +9,7 @@
     </style>
 </head>
 <body>
-    <h1>Recipe Book</h1>
-    <h2>Recipes</h2>
+    <h1>Recipe Book • List</h1>
     <ul>
         {% for recipe in recipes %}
         <li>
@@ -22,7 +19,7 @@
                 <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</li>
                 {% endfor %}
             </ul>
-            <a href="{{ recipe.get_absolute_url }}">Link to Recipe</a>
+            <a href="http://localhost:8000/recipes/{{ recipe.id }}">Link to Recipe</a>
         </li>
         {% endfor %}
     </ul>
