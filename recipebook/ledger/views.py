@@ -1,18 +1,10 @@
-from typing import Any
-from django.shortcuts import render, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from .models import Ingredient, RecipeIngredient, Recipe
+from .models import Recipe
 
 #def recipe_list(request):
 #     recipes = Recipe.objects.all()
 #     return render(request, 'recipeList.html', {'recipes':recipes})
-
-class RecipeListView(ListView):
-
-    template_name = 'recipeList.html'
-    model = Recipe
-    context_object_name = 'recipes'
 
 # def recipe_detail(request, id):
 #     recipe = get_object_or_404(Recipe, id=id)
@@ -21,6 +13,12 @@ class RecipeListView(ListView):
 #     context = {'recipe': recipe, 'ingredients': ingredients}
 
 #     return render(request, 'recipe_1.html', context)
+
+class RecipeListView(ListView):
+
+    template_name = 'recipeList.html'
+    model = Recipe
+    context_object_name = 'recipes'
     
 class RecipeDetailView(DetailView):
     model = Recipe
