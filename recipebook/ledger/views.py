@@ -22,7 +22,7 @@ class RecipeListView(ListView):
     
 class RecipeDetailView(DetailView):
     model = Recipe
-    template_name = 'recipe_1.html'
+    template_name = 'recipeDetails.html'
     context_object_name = 'recipe'
 
     def get_context_data(self, **kwargs):
