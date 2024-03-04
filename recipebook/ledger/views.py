@@ -20,14 +20,18 @@ class RecipeListView(ListView):
     model = Recipe
     context_object_name = 'recipes'
     
+
+
 class RecipeDetailView(DetailView):
     model = Recipe
     template_name = 'recipeDetails.html'
     context_object_name = 'recipe'
 
     def get_context_data(self, **kwargs):
+        
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
         ingredients = recipe.recipeingredient_set.all()
         context['ingredients'] = ingredients
+
         return context
