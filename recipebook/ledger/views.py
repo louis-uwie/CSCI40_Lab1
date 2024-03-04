@@ -13,6 +13,8 @@ class recipeListView(ListView):
     model = Recipe
     context_object_name = 'recipes'
 
+
+
 class recipeDetail(ListView):
     
     template_name = 'recipe_1.html'
@@ -24,6 +26,8 @@ class recipeDetail(ListView):
         context = super().get_context_data(**kwargs)
 
         return context
+
+
 
 def recipe_detail(request, id):
     recipe = get_object_or_404(Recipe, id=id)
