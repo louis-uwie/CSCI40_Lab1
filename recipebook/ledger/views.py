@@ -27,10 +27,7 @@ class RecipeDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Fetch the recipe object
         recipe = self.get_object()
-        # Get the list of ingredients for the recipe
         ingredients = recipe.recipeingredient_set.all()
-        # Add the ingredients to the context
         context['ingredients'] = ingredients
         return context
