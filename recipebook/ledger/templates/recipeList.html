@@ -19,7 +19,7 @@
                 <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</li>
                 {% endfor %}
             </ul>
-            <a href="http://localhost:8000/recipes/{{ recipe.id }}">Link to Recipe</a>
+            <a href="{% url 'recipe_detail' pk=recipe.pk %}">Link to Recipe</a>
         </li>
         {% endfor %}
     </ul>
