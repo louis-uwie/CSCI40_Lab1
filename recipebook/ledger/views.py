@@ -1,14 +1,15 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
+from django.contrib.auth import logout, login, authenticate
+from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Recipe
+
+def password_reset_confirm():
+    pass
 
 def login_view(request):
     if request.method == 'POST':
@@ -24,6 +25,7 @@ def login_view(request):
             messages.error(request, 'Invalid username or password.')
 
     return render(request, 'registration/login.html')
+
 
 
 def logout_view(request):

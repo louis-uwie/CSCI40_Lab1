@@ -10,6 +10,9 @@ def minimumBio(a):
 Test Users:
     username: John
     password: usertest1
+
+    username: Louis
+    password: authortest1
 '''
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, default=None)

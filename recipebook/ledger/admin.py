@@ -12,8 +12,5 @@ class ProfileInline(admin.StackedInline):
 class CustomUserAdmin(UserAdmin):
     inlines = (ProfileInline,)
 
-# Unregister the default User admin
 admin.site.unregister(User)
-
-# Register the custom User admin
 admin.site.register(User, CustomUserAdmin)
