@@ -1,20 +1,39 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
+from django.shortcuts import render, redirect
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from .models import Recipe
 
-#def recipe_list(request):
-#     recipes = Recipe.objects.all()
-#     return render(request, 'recipeList.html', {'recipes':recipes})
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=username, password=password)
 
-# def recipe_detail(request, id):
-#     recipe = get_object_or_404(Recipe, id=id)
-#     ingredients = recipe.recipeingredient_set.all()
+        if user is not None:
+            login(request, user)
+            return redirect('recipe_list')
+        
+        else:
+            messages.error(request, 'Invalid username or password.')
 
-#     context = {'recipe': recipe, 'ingredients': ingredients}
+    return render(request, 'registration/login.html')
 
-#     return render(request, 'recipe_1.html', context)
 
-class RecipeListView(ListView):
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page or homepage
+    return redirect('login')
+
+
+
+class RecipeListView(LoginRequiredMixin, ListView):
 
     template_name = 'recipeList.html'
     model = Recipe
@@ -22,7 +41,7 @@ class RecipeListView(ListView):
     
 
 
-class RecipeDetailView(DetailView):
+class RecipeDetailView(LoginRequiredMixin, DetailView):
 
     model = Recipe
     template_name = 'recipeDetails.html'

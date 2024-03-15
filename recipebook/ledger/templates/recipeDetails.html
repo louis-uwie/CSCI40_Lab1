@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <head>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
     <title>{{ recipe.name }}</title>
     <style>
         body {
@@ -9,14 +13,23 @@
         }
     </style>
 </head>
+
 <body>
     <h1>Recipe Book</h1>
     <h2>{{ recipe.name }}</h2>
+    <p><strong>Author:</strong> {{ recipe.author.username }}</p>
+    <p><strong>Created:</strong> {{ recipe.created }}</p>
+    <p><strong>Updated:</strong> {{ recipe.updated }}</p>
     <ul>
-        {% for recipe_ingredient in ingredients %}
+        {% for recipe_ingredient in recipe.recipeingredient_set.all %}
         <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</li>
         {% endfor %}
     </ul>
-    <a href="http://localhost:8000/recipes/list/">Go back</a>
+    
+    <form action="{% url 'recipe_list' %}" method="get">
+        <button type="submit">Go back</button>
+    </form>
+    
 </body>
+
 </html>
