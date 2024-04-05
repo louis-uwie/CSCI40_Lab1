@@ -3,10 +3,16 @@
 {% block title %}Recipe Book | List{% endblock %}
 
 {% block content %}
+
+
     <h1>Recipe Book • List</h1>
+
+
     <form action="{% url 'upload_recipe' %}" method="get">
         <button type="submit">Add Recipe</button>
     </form>
+
+
     <ul>
         {% for recipe in recipes %}
         <li>
@@ -23,6 +29,10 @@
             </form>
         
         </li>
+
         {% endfor %}
+
     </ul>
+
+
 {% endblock %}
