@@ -10,4 +10,7 @@ urlpatterns = [
     path('recipes/list/', login_required(views.RecipeListView.as_view()), name='recipe_list'),
     path('recipe/<int:pk>/', login_required(views.RecipeDetailView.as_view()), name='recipe_detail'),
     
+    path('recipe/add/', views.upload_recipe, name='upload_recipe'),
+    path('recipe/add/', views.upload_image, name='upload_image'),
+    
 ]

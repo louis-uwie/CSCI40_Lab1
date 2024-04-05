@@ -7,6 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Recipe
+from .forms import RecipeImageForm
+from .forms import RecipeForm
 
 
 def password_reset_confirm():
@@ -29,11 +31,47 @@ def login_view(request):
     return render(request, 'registration/login.html')
 
 
-
 def logout_view(request):
     logout(request)
     # Redirect to a success page or homepage
     return redirect('login')
+
+
+def upload_recipe(request):
+    if request.method == 'POST':
+        # Create a RecipeForm instance with the submitted data
+        form = RecipeForm(request.POST)
+        if form.is_valid():
+            # Create a new Recipe object with the form data
+            recipe = Recipe(name=form.cleaned_data['name'], author=request.user)
+            # Save the new Recipe object to the database
+            recipe.save()
+            print("Recipe saved successfully:", recipe)  # Debug statement
+            # Redirect to the success URL
+            return redirect('recipe_list')
+        else:
+            print("Form errors:", form.errors)  # Debug statement
+    else:
+        form = RecipeForm()
+    return render(request, 'recipe_create.html', {'form': form})
+
+
+
+def upload_image(request):
+    if request.method == 'POST':
+        form = RecipeImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            print("Form is valid")  # Debug statement
+            recipe_image = form.save(commit=False)
+            recipe_image.author = request.user
+            recipe_image.save()
+            print("Recipe image saved:", recipe_image)  # Debug statement
+            return redirect('success_url')
+        else:
+            print("Form errors:", form.errors)  # Debug statement
+    else:
+        form = RecipeImageForm()
+    return render(request, 'recipe_create.html', {'form': form})
 
 
 

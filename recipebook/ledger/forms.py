@@ -1,9 +1,13 @@
 from django import forms
-from .models import Recipe, RecipeImage
+from .models import Recipe
+from .models import RecipeImage
 
-class RecipeForm(forms.Form):
-    name = forms.CharField(label = 'Author Name', max_length=100)
-    
+class RecipeForm(forms.ModelForm):
+    class Meta:
+        model = Recipe
+        fields = ['name'] 
 
-class RecipeImageForm(forms.Form):
-    name = forms.Char
+class RecipeImageForm(forms.ModelForm):
+    class Meta:
+        model = RecipeImage
+        fields = ['image', 'description'] 

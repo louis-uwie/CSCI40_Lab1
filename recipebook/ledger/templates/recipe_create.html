@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<form action="{% url 'recipe_list' %}" method="get">
+    <button type="submit">Go back</button>
+</form>
+
+    <head>
+        <title>Create Recipe</title>
+    </head>
+
+<body>
+
+    <h1>Create Recipe</h1>
+    <form action="{% url 'upload_recipe' %}" method="post">
+        {% csrf_token %}
+        
+        <label for="name">Recipe Name:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+
+        <label for="author">Author (currently logged in):</label>
+
+        <b>{{ request.user.username }}</b>
+        <input type="hidden" id="author" name="author" value="{{ request.user.id }}">
+        <br>
+
+        <button type="submit">Create Recipe</button>
+    </form>
+</body>
+</html>

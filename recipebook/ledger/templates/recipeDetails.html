@@ -3,6 +3,7 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block content %}
+
     <h2>{{ recipe.name }}</h2>
 
     <p><strong>Author:</strong> {{ recipe.author.username }}</p>
@@ -17,6 +18,15 @@
     
     <form action="{% url 'recipe_list' %}" method="get">
         <button type="submit">Go back</button>
+    </form>
+
+    <br>
+    
+    <form action="{% url 'upload_image' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="image">Upload Image:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <button type="submit">Upload</button>
     </form>
 
 {% endblock %}
