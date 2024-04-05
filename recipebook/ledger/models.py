@@ -8,6 +8,10 @@ def minimumBio(a):
 
 '''
 Test Users:
+    [ADMIN]
+    username: admin
+    password: admin
+
     username: John
     password: usertest1
 
