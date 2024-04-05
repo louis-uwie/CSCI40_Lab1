@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+
+        <title>{% block title %}Recipe Book{% endblock %}</title>
+
+    </head>
+
+    <body>
+        <header>
+            <h1>Recipe Book</h1>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+
+</html>

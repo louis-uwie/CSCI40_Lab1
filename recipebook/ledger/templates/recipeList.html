@@ -1,20 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    <title>Recipe Book | List</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-    </style>
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block title %}Recipe Book | List{% endblock %}
+
+{% block content %}
     <h1>Recipe Book • List</h1>
     <ul>
         {% for recipe in recipes %}
@@ -27,6 +15,8 @@
                 {% endfor %}
             </ul>
 
+            {% comment %} 
+            
             <form action="/" method = "post">
                 {% csrf_token %}
                 <label for = "recipe_detail">
@@ -47,6 +37,7 @@
 
             </form>
 
+            {% endcomment %}
             <form action="{% url 'recipe_detail' pk=recipe.pk %}" method="get">
                 <button type="submit">Link to Recipe</button>
             </form>
@@ -54,5 +45,4 @@
         </li>
         {% endfor %}
     </ul>
-</body>
-</html>
+{% endblock %}

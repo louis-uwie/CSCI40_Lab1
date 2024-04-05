@@ -1,29 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
-    <title>{{ recipe.name }}</title>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-        }
-    </style>
-</head>
+{% block title %}{{ recipe.name }}{% endblock %}
 
-<body>
-    <h1>Recipe Book</h1>
+{% block content %}
     <h2>{{ recipe.name }}</h2>
-
-    {% load static %}
-    <img src="{% static 'Astra-3D-Camera.webp' %}" alt="recipe_images">
 
     <p><strong>Author:</strong> {{ recipe.author.username }}</p>
     <p><strong>Created:</strong> {{ recipe.created }}</p>
     <p><strong>Updated:</strong> {{ recipe.updated }}</p>
+    
     <ul>
         {% for recipe_ingredient in recipe.recipeingredient_set.all %}
         <li>[{{ recipe_ingredient.quantity }}] <b> {{ recipe_ingredient.ingredient.name }} </b></li>
@@ -33,7 +18,5 @@
     <form action="{% url 'recipe_list' %}" method="get">
         <button type="submit">Go back</button>
     </form>
-    
-</body>
 
-</html>
+{% endblock %}
