@@ -12,9 +12,11 @@ Test Users:
     username: admin
     password: admin
 
-    username: John
-    password: usertest1
+    [ADMIN]
+    username: uwie
+    password: uwie
 
+    [USER]
     username: Louis
     password: authortest1
 '''
