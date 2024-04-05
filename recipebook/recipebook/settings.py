@@ -129,7 +129,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
 MEDIA_ROOT = 'recipe_images/'
 
 
