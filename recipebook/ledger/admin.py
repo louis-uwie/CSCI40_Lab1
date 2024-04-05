@@ -10,14 +10,17 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'Profile'
 
 
+
 class RecipeInline(admin.TabularInline):
     model = RecipeIngredient
     can_delete = True
     verbose_name_plural = 'Recipes'
 
 
+
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [RecipeInline]
+
 
 
 class CustomUserAdmin(UserAdmin):

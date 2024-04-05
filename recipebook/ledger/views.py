@@ -11,6 +11,9 @@ from .forms import RecipeImageForm
 from .forms import RecipeForm
 
 
+'''
+Logging in and out of the site.
+'''
 def password_reset_confirm():
     pass
 
@@ -37,26 +40,29 @@ def logout_view(request):
     return redirect('login')
 
 
+'''
+Method for uploading a new recipe.
+'''
 def upload_recipe(request):
     if request.method == 'POST':
-        # Create a RecipeForm instance with the submitted data
         form = RecipeForm(request.POST)
+        
         if form.is_valid():
-            # Create a new Recipe object with the form data
             recipe = Recipe(name=form.cleaned_data['name'], author=request.user)
-            # Save the new Recipe object to the database
             recipe.save()
-            print("Recipe saved successfully:", recipe)  # Debug statement
-            # Redirect to the success URL
+            print("Recipe saved successfully:", recipe)
             return redirect('recipe_list')
-        else:
-            print("Form errors:", form.errors)  # Debug statement
+        
     else:
+        
         form = RecipeForm()
+        
     return render(request, 'recipe_create.html', {'form': form})
 
 
-
+'''
+Method for uploading images to the recipe.
+'''
 def upload_image(request):
     if request.method == 'POST':
         form = RecipeImageForm(request.POST, request.FILES)
@@ -74,7 +80,9 @@ def upload_image(request):
     return render(request, 'recipe_create.html', {'form': form})
 
 
-
+'''
+View for the recipe list page.
+'''
 class RecipeListView(LoginRequiredMixin, ListView):
 
     model = Recipe
@@ -82,7 +90,9 @@ class RecipeListView(LoginRequiredMixin, ListView):
     context_object_name = 'recipes'
     
 
-
+'''
+View for the recipe details page.
+'''
 class RecipeDetailView(LoginRequiredMixin, DetailView):
 
     model = Recipe

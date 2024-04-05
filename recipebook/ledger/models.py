@@ -3,6 +3,9 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
+'''
+A checker to ensure that the bio is at least 255 characters long.
+'''
 def minimumBio(a):
     if a < 255: raise ValidationError("Bio should be at least 255 characters.")
 
@@ -28,6 +31,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.name
 
+
+'''
+recipe class to store the recipe name, author, and creation date.
+'''
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=None, null=True)
@@ -38,7 +45,9 @@ class Recipe(models.Model):
         return self.name
     
 
-
+'''
+class Ingredient to store the ingredients of a recipe.
+'''
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
 
@@ -46,7 +55,9 @@ class Ingredient(models.Model):
         return self.name
 
 
-
+'''
+RecipeIngredient class to link recipes to ingredients.
+'''
 class RecipeIngredient(models.Model):
     
     quantity = models.CharField(max_length=50)
@@ -60,7 +71,9 @@ class RecipeIngredient(models.Model):
         return reverse('recipe_detail', args=[str(self.recipe.pk)])
 
 
-
+'''
+Class for recipe images.
+'''
 class RecipeImage(models.Model):
     image = models.ImageField(upload_to='static/')
     description = models.CharField(max_length=255)
