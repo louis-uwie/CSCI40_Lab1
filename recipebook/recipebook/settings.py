@@ -122,7 +122,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = 'recipe_images/'
+STATIC_URL = 'static/'
+
+MEDIA_ROOT = 'recipe_images/'
 
 
 

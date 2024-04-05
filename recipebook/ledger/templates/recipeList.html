@@ -13,6 +13,7 @@
         
     </style>
 </head>
+
 <body>
     <h1>Recipe Book • List</h1>
     <ul>
@@ -25,6 +26,26 @@
                 <li>{{ recipe_ingredient.quantity }} {{ recipe_ingredient.ingredient.name }}</li>
                 {% endfor %}
             </ul>
+
+            <form action="/" method = "post">
+                {% csrf_token %}
+                <label for = "recipe_detail">
+                    <span> Recipe Detail </span>
+                    <input type="text" id="recipe_detail" name="recipe_detail">
+                </label>
+
+                <label for = "recipe_ingredient">
+                    <span> Recipe Ingredients </span>
+                    <input type = "text" id = "recipe_ingredient" name = "recipe_ingredient">
+                </label>
+
+                <select id = "Recipe" name = "Recipe">
+                    {% for recipe in recipes.all %}
+                        <option value = "{{ recipe.pk }}"> {{ recipe.name }} </option>
+                    {% endfor %}
+                </select>
+
+            </form>
 
             <form action="{% url 'recipe_detail' pk=recipe.pk %}" method="get">
                 <button type="submit">Link to Recipe</button>

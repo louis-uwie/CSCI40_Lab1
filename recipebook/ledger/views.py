@@ -8,8 +8,10 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import Recipe
 
+
 def password_reset_confirm():
     pass
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -37,8 +39,8 @@ def logout_view(request):
 
 class RecipeListView(LoginRequiredMixin, ListView):
 
-    template_name = 'recipeList.html'
     model = Recipe
+    template_name = 'recipeList.html'
     context_object_name = 'recipes'
     
 
