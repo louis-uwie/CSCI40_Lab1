@@ -11,6 +11,5 @@ urlpatterns = [
     path('recipe/<int:pk>/', login_required(views.RecipeDetailView.as_view()), name='recipe_detail'), #For Viewing Specific Recipes
     
     path('recipe/add/', views.upload_recipe, name='upload_recipe'), #For Uploading Recipes
-    path('recipe/add/', views.upload_image, name='upload_image'), #For Uploading Images
-    
+    path('recipe/<int:recipe_pk>/add_image/', views.add_image, name='add_image'), #For Uploading Images
 ]

@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import logout, login, authenticate
 from django.shortcuts import redirect, render
 from django.contrib import messages
@@ -63,21 +63,21 @@ def upload_recipe(request):
 '''
 Method for uploading images to the recipe.
 '''
-def upload_image(request):
+def add_image(request, recipe_pk):
+    recipe = Recipe.objects.get(pk=recipe_pk)
     if request.method == 'POST':
         form = RecipeImageForm(request.POST, request.FILES)
         if form.is_valid():
-            print("Form is valid")  # Debug statement
             recipe_image = form.save(commit=False)
-            recipe_image.author = request.user
+            recipe_image.recipe = recipe
             recipe_image.save()
-            print("Recipe image saved:", recipe_image)  # Debug statement
-            return redirect('success_url')
-        else:
-            print("Form errors:", form.errors)  # Debug statement
+            return redirect('recipe_detail', pk=recipe_pk)
+
     else:
         form = RecipeImageForm()
-    return render(request, 'recipe_create.html', {'form': form})
+    return redirect('recipe_detail', pk=recipe_pk)
+
+
 
 
 '''
@@ -94,7 +94,11 @@ class RecipeListView(LoginRequiredMixin, ListView):
 View for the recipe details page.
 '''
 class RecipeDetailView(LoginRequiredMixin, DetailView):
-
     model = Recipe
     template_name = 'recipeDetails.html'
     context_object_name = 'recipe'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recipe_pk'] = self.object.pk  # Include recipe_pk in the context
+        return context

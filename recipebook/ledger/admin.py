@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import Profile, Recipe, RecipeImage, RecipeIngredient, Ingredient
@@ -11,6 +10,12 @@ class ProfileInline(admin.StackedInline):
 
 
 
+class RecipeImageInline(admin.TabularInline):
+    model = RecipeImage
+    extra = 1
+
+
+
 class RecipeInline(admin.TabularInline):
     model = RecipeIngredient
     can_delete = True
@@ -19,16 +24,13 @@ class RecipeInline(admin.TabularInline):
 
 
 class RecipeAdmin(admin.ModelAdmin):
-    inlines = [RecipeInline]
+    inlines = [RecipeInline, RecipeImageInline]
 
 
 
 class CustomUserAdmin(UserAdmin):
     inlines = [ProfileInline]
 
-
-
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Recipe, RecipeAdmin)
-
