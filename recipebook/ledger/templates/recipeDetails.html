@@ -3,11 +3,7 @@
 {% block title %}{{ recipe.name }}{% endblock %}
 
 {% block content %}
-
-
     <h2>{{ recipe.name }}</h2>
-
-
 
     <p><strong>Author:</strong> {{ recipe.author.username }}</p>
     <p><strong>Created:</strong> {{ recipe.created }}</p>
@@ -15,7 +11,7 @@
     
     <ul>
         {% for recipe_ingredient in recipe.recipeingredient_set.all %}
-        <li>[{{ recipe_ingredient.quantity }}] <b> {{ recipe_ingredient.ingredient.name }} </b></li>
+            <li>[{{ recipe_ingredient.quantity }}] <b>{{ recipe_ingredient.ingredient.name }}</b></li>
         {% endfor %}
     </ul>
     
@@ -23,36 +19,29 @@
         <button type="submit">Go back</button>
     </form>
 
-
-
     <br>
-    {% load static %}
 
     <style>
         .recipe-image {
             max-width: 300px;
             max-height: 300px;
         }
-        
     </style>
 
-        <h3>Images:</h3>
-        <ul>
-            {% for image in recipe.images.all %}
-                <li>
-                    <img src="{{ image.image.url }}" alt="{{ image.description }}" class="recipe-image">
-                    <p>{{ image.description }}</p>
-                </li>
-            {% endfor %}
-        </ul>
-
-
+    <h3>Images:</h3>
+    <ul>
+        {% for image in recipe.images.all %}
+            <li>
+                <img src="{{ image.image.url }}" alt="{{ image.description }}" class="recipe-image">
+                <p>{{ image.description }}</p>
+            </li>
+        {% endfor %}
+    </ul>
 
     <br>
+
     <form action="{% url 'add_image' recipe_pk=recipe.pk %}" method="post" enctype="multipart/form-data">
-
         {% csrf_token %}
-
 
         <label for="image">Upload Image:</label>
         <input type="file" id="image" name="image" accept="image/*" required>
@@ -63,7 +52,5 @@
         <input type="text" id="description" name="description" required>
 
         <button type="submit">Upload</button>
-
     </form>
-    
 {% endblock %}
