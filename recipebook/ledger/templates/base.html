@@ -2,6 +2,7 @@
 
 <html lang="en">
 
+
 <style>
     body {
         font-family: 'Montserrat', sans-serif;
@@ -13,16 +14,19 @@
     }
 </style>
 
+
 <form action="{% url 'logout' %}" method="post">
     {% csrf_token %}
     <button type="submit">Logout</button>
 </form>
+
 
     <head>
         
         <title>{% block title %}Recipe Book{% endblock %}</title>
 
     </head>
+
 
     <body>
         <header>
@@ -33,5 +37,6 @@
             {% endblock %}
         </main>
     </body>
+
 
 </html>

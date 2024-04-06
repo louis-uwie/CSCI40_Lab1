@@ -9,20 +9,24 @@ class ProfileInline(admin.StackedInline):
     verbose_name_plural = 'Profile'
 
 
-
+'''
+Displaying the recipes images on table form
+'''
 class RecipeImageInline(admin.TabularInline):
     model = RecipeImage
-    extra = 1
 
-
-
+'''
+Displaying ingredients in table form
+'''
 class RecipeInline(admin.TabularInline):
     model = RecipeIngredient
     can_delete = True
     verbose_name_plural = 'Recipes'
 
 
-
+'''
+Displaying Recipes first, then under recipe, Images and Ingredients.
+'''
 class RecipeAdmin(admin.ModelAdmin):
     inlines = [RecipeInline, RecipeImageInline]
 
